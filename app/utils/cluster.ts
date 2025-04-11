@@ -30,6 +30,7 @@ export function clusterSlug(cluster: Cluster): string {
 }
 
 export function clusterName(cluster: Cluster): string {
+    console.log("cluster", cluster);
     switch (cluster) {
         case Cluster.MainnetBeta:
             return 'Mainnet Beta';
