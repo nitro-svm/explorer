@@ -80,31 +80,26 @@ export function SolanaClusterStatsProvider({ children }: Props) {
 
         let lastSlot: bigint | null = null;
         let stale = false;
+
+        // Mock performance samples instead of fetching
         const getPerformanceSamples = async () => {
             try {
-                const samplesResponse = await rpc.getRecentPerformanceSamples(60 * SAMPLE_HISTORY_HOURS).send();
-
-                const samples: PerformanceSample[] = samplesResponse.map(s => ({
-                    numSlots: s.numSlots,
-                    numTransactions: s.numTransactions,
-                    samplePeriodSecs: s.samplePeriodSecs,
+                // Create mock samples for the last hour (60 samples)
+                const mockSamples: PerformanceSample[] = Array.from({ length: 60 }, () => ({
+                    numSlots: BigInt(50),  // Assuming ~50 slots per sample
+                    numTransactions: BigInt(1000),  // Assuming ~1000 transactions per sample
+                    samplePeriodSecs: 60,  // 1 minute samples
                 }));
 
-                if (stale) {
-                    return;
-                }
-                if (samplesResponse.length < 1) {
-                    // no samples to work with (node has no history).
-                    return; // we will allow for a timeout instead of throwing an error
-                }
+                if (stale) return;
 
                 dispatchPerformanceInfo({
-                    data: samples,
+                    data: mockSamples,
                     type: PerformanceInfoActionType.SetPerfSamples,
                 });
 
                 dispatchDashboardInfo({
-                    data: samples,
+                    data: mockSamples,
                     type: DashboardInfoActionType.SetPerfSamples,
                 });
             } catch (error) {
@@ -125,14 +120,16 @@ export function SolanaClusterStatsProvider({ children }: Props) {
             }
         };
 
+        // Mock transaction count instead of fetching
         const getTransactionCount = async () => {
             try {
-                const transactionCount = await rpc.getTransactionCount({ commitment: 'confirmed' }).send();
-                if (stale) {
-                    return;
-                }
+                // Use a mock transaction count
+                const mockTransactionCount = BigInt(1000000);  // 1 million transactions
+                
+                if (stale) return;
+                
                 dispatchPerformanceInfo({
-                    data: transactionCount,
+                    data: mockTransactionCount,
                     type: PerformanceInfoActionType.SetTransactionCount,
                 });
             } catch (error) {
@@ -149,6 +146,7 @@ export function SolanaClusterStatsProvider({ children }: Props) {
             }
         };
 
+        // Keep existing getEpochInfo and getBlockTime functions as is
         const getEpochInfo = async () => {
             try {
                 const epochInfoResponse = await rpc.getEpochInfo().send();
@@ -204,6 +202,7 @@ export function SolanaClusterStatsProvider({ children }: Props) {
             }
         };
 
+        // Keep existing intervals
         const performanceInterval = setInterval(getPerformanceSamples, PERFORMANCE_SAMPLE_INTERVAL);
         const transactionCountInterval = setInterval(getTransactionCount, TRANSACTION_COUNT_INTERVAL);
         const epochInfoInterval = setInterval(getEpochInfo, EPOCH_INFO_INTERVAL);
