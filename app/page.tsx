@@ -176,7 +176,7 @@ function StatsCardBody() {
                     </td>
                 </tr>
             )}
-            {blockTime && (
+            {blockTime !== undefined && (
                 <tr>
                     <td className="w-100">Cluster time</td>
                     <td className="text-lg-end font-monospace">
@@ -185,11 +185,11 @@ function StatsCardBody() {
                 </tr>
             )}
             <tr>
-                <td className="w-100">Slot time (1min average)</td>
+                <td className="w-100">Slot time (1 min average)</td>
                 <td className="text-lg-end font-monospace">{averageSlotTime}ms</td>
             </tr>
             <tr>
-                <td className="w-100">Slot time (1hr average)</td>
+                <td className="w-100">Slot time (1 hr average)</td>
                 <td className="text-lg-end font-monospace">{hourlySlotTime}ms</td>
             </tr>
             <tr>

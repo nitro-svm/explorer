@@ -61,7 +61,7 @@ function parseQuery(searchParams: ReadonlyURLSearchParams | null): Cluster {
             return Cluster.Testnet;
         case 'mainnet-beta':
         default:
-            return Cluster.MainnetBeta;
+            return DEFAULT_CLUSTER;
     }
 }
 
@@ -104,6 +104,7 @@ export function ClusterProvider({ children }: ClusterProviderProps) {
         updateCluster(dispatch, cluster, customUrl);
     }, [cluster, customUrl]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    console.log('state', state.cluster, DEFAULT_CLUSTER);
     return (
         <StateContext.Provider value={state}>
             <DispatchContext.Provider value={dispatch}>
