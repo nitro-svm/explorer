@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 'use client';
 
 import { Epoch } from '@components/common/Epoch';
@@ -28,7 +30,7 @@ export default function Page() {
         <StatsProvider>
             <SupplyProvider>
                 <div className="container mt-4">
-                    <StakingComponent />
+                    {/* <StakingComponent /> */}
                     <div className="card">
                         <div className="card-header">
                             <div className="row align-items-center">
