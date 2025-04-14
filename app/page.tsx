@@ -28,7 +28,7 @@ export default function Page() {
         <StatsProvider>
             <SupplyProvider>
                 <div className="container mt-4">
-                    <StakingComponent />
+                    {/* <StakingComponent /> */}
                     <div className="card">
                         <div className="card-header">
                             <div className="row align-items-center">
@@ -46,6 +46,7 @@ export default function Page() {
     );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function StakingComponent() {
     const { status } = useCluster();
     const supply = useSupply();

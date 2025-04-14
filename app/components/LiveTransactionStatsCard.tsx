@@ -40,7 +40,7 @@ export function LiveTransactionStatsCard() {
                 <h4 className="card-header-title">Live Transaction Stats</h4>
             </div>
             <TpsCardBody series={series} setSeries={setSeries} />
-            <PingStatsCardBody series={series} setSeries={setSeries} />
+            {/* <PingStatsCardBody series={series} setSeries={setSeries} /> */}
         </div>
     );
 }
@@ -266,6 +266,7 @@ function AnimatedTransactionCount({ info }: { info: PerformanceInfo }) {
     );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function PingStatsCardBody({ series, setSeries }: { series: Series; setSeries: SetSeries }) {
     const pingInfo = useSolanaPingInfo();
 
