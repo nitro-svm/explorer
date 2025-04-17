@@ -12,6 +12,9 @@
     endpoints not suitable for application development. You must set these URLs with \
     endpoints from your own provider.
 
+-  `pnpm install` \
+    Installs dependencies when setting up for the first time.
+
 -   `pnpm dev` \
     Runs the app in the development mode. \
     Open [http://localhost:3000](http://localhost:3000) to view it in the browser. \

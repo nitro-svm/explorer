@@ -1,6 +1,6 @@
 import { Stream } from '@cloudflare/stream-react';
 import { LoadingArtPlaceholder } from '@components/common/LoadingArtPlaceholder';
-import ErrorLogo from '@img/logos-solana/dark-solana-logo.svg';
+import ErrorLogo from '@img/logos/solana/dark-logo.svg';
 import { MetadataJson, MetaDataJsonCategory, MetadataJsonFile } from '@metaplex/js';
 import { PublicKey } from '@solana/web3.js';
 import { getLast } from '@utils/index';
