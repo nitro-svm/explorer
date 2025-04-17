@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 export async function GET() {
     const appName = process.env.NEXT_PUBLIC_APP_NAME || 'Solana';
     
-    // Build the manifest object
     const manifest = {
       "background_color": "#ffffff",
       "display": "standalone",
