@@ -11,12 +11,16 @@ import type { Viewport } from 'next';
 import { Rubik } from 'next/font/google';
 import { Metadata } from 'next/types';
 
-const appName = process?.env?.NEXT_PUBLIC_APP_NAME || 'Solana';
-export const metadata: Metadata = {
-    description: `Inspect transactions, accounts, blocks, and more on the ${appName} blockchain`,
-    manifest: '/manifest.json',
-    title: `Explorer | ${appName}`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const appName = process.env.NEXT_PUBLIC_APP_NAME || 'Solana';
+    
+    return {
+      description: `Inspect transactions, accounts, blocks, and more on the ${appName} blockchain`,
+      manifest: '/api/manifest.json',
+      metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
+      title: `Explorer | ${appName}`,
+    };
+  }
 
 export const viewport: Viewport = {
     initialScale: 1,
@@ -38,8 +42,13 @@ export default function RootLayout({
     analytics?: React.ReactNode;
     children: React.ReactNode;
 }) {
+    const appName = process.env.NEXT_PUBLIC_APP_NAME || 'Solana';
     return (
         <html lang="en" className={`${rubikFont.variable}`}>
+            <head>
+                <link rel="icon" href={`/icons/${appName.toLowerCase()}/favicon.ico`} />
+                <link rel="apple-touch-icon" href={`/icons/${appName.toLowerCase()}/apple-icon.png`} />
+            </head>
             <body>
                 <ScrollAnchorProvider>
                     <ClusterProvider>
