@@ -1,6 +1,5 @@
 'use client';
 
-import Logo from '@img/logos-solana/dark-explorer-logo.svg';
 import { useClusterPath } from '@utils/url';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,6 +9,15 @@ import React from 'react';
 import { ClusterStatusButton } from './ClusterStatusButton';
 
 export function Navbar() {
+    let appName = process?.env?.NEXT_PUBLIC_APP_NAME;
+    let logo;
+    if (appName) {
+        logo = require(`@img/logos/${appName.toLowerCase()}/logo.png`);
+    } else {
+        logo = require('@img/logos/solana/dark-explorer-logo.svg');
+        appName = 'Solana';
+    }
+
     // TODO: use `collapsing` to animate collapsible navbar
     const [collapse, setCollapse] = React.useState(false);
     const homePath = useClusterPath({ pathname: '/' });
@@ -21,7 +29,7 @@ export function Navbar() {
         <nav className="navbar navbar-expand-md navbar-light">
             <div className="container">
                 <Link href={homePath}>
-                    <Image alt="Solana Explorer" height={22} src={Logo} width={250} />
+                    <Image alt={`${appName} Explorer`} height={50} src={logo} />
                 </Link>
 
                 <button className="navbar-toggler" type="button" onClick={() => setCollapse(value => !value)}>
