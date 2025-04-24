@@ -111,7 +111,8 @@ export function dashboardInfoReducer(state: DashboardInfo, action: DashboardInfo
 
             // interpolate blocktime based on last known blocktime and average slot time
             if (
-                state.lastBlockTime &&
+                state.lastBlockTime && 
+                state.lastBlockTime.blockTime !== 0 &&
                 state.avgSlotTime_1h !== 0 &&
                 action.data.absoluteSlot >= state.lastBlockTime.slot
             ) {
