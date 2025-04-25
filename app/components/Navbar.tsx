@@ -21,7 +21,7 @@ export function Navbar() {
     // TODO: use `collapsing` to animate collapsible navbar
     const [collapse, setCollapse] = React.useState(false);
     const homePath = useClusterPath({ pathname: '/' });
-    const supplyPath = useClusterPath({ pathname: '/supply' });
+    // const supplyPath = useClusterPath({ pathname: '/supply' });
     const inspectorPath = useClusterPath({ pathname: '/tx/inspector' });
     const selectedLayoutSegment = useSelectedLayoutSegment();
     const selectedLayoutSegments = useSelectedLayoutSegments();
@@ -46,14 +46,14 @@ export function Navbar() {
                                 Cluster Stats
                             </Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link
                                 className={`nav-link${selectedLayoutSegment === 'supply' ? ' active' : ''}`}
                                 href={supplyPath}
                             >
                                 Supply
                             </Link>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <Link
                                 className={`nav-link${
