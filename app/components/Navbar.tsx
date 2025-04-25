@@ -21,7 +21,7 @@ export function Navbar() {
     // TODO: use `collapsing` to animate collapsible navbar
     const [collapse, setCollapse] = React.useState(false);
     const homePath = useClusterPath({ pathname: '/' });
-    const supplyPath = useClusterPath({ pathname: '/supply' });
+    // const supplyPath = useClusterPath({ pathname: '/supply' });
     const inspectorPath = useClusterPath({ pathname: '/tx/inspector' });
     const selectedLayoutSegment = useSelectedLayoutSegment();
     const selectedLayoutSegments = useSelectedLayoutSegments();
