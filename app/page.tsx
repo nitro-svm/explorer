@@ -177,7 +177,7 @@ function StatsCardBody() {
                     </td>
                 </tr>
             )}
-            {blockTime !== undefined && (
+            {blockTime !== undefined && blockTime !== 0 && (
                 <tr>
                     <td className="w-100">Cluster time</td>
                     <td className="text-lg-end font-monospace">
