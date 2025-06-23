@@ -216,7 +216,7 @@ function AddressLayoutInner({ children, params: { address } }: Props) {
         if (!info && status === ClusterStatus.Connected && pubkey) {
             fetchAccount(pubkey, 'parsed');
         }
-    }, [address, status]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [address, status, info, fetchAccount]);
 
     return (
         <div className="container mt-n3">

@@ -127,11 +127,25 @@ async function updateCluster(dispatch: Dispatch, cluster: Cluster, customUrl: st
         const transportUrl = clusterUrl(cluster, customUrl);
         const rpc = createSolanaRpc(transportUrl);
 
-        const [firstAvailableBlock, epochSchedule, epochInfo] = await Promise.all([
+        const [firstAvailableBlock, epochInfo] = await Promise.all([
             rpc.getFirstAvailableBlock().send(),
-            rpc.getEpochSchedule().send(),
             rpc.getEpochInfo().send(),
         ]);
+
+        // Try to get epoch schedule, but use default if not supported
+        let epochSchedule;
+        try {
+            epochSchedule = await rpc.getEpochSchedule().send();
+        } catch (error) {
+            // If getEpochSchedule is not supported, use default devnet values
+            epochSchedule = {
+                slotsPerEpoch: 432000n,
+                leaderScheduleSlotOffset: 432000n,
+                warmup: false,
+                firstNormalEpoch: 0n,
+                firstNormalSlot: 0n,
+            };
+        }
 
         dispatch({
             cluster,
