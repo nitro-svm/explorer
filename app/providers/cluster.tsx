@@ -139,11 +139,11 @@ async function updateCluster(dispatch: Dispatch, cluster: Cluster, customUrl: st
         } catch (error) {
             // If getEpochSchedule is not supported, use default devnet values
             epochSchedule = {
-                slotsPerEpoch: 432000n,
-                leaderScheduleSlotOffset: 432000n,
-                warmup: false,
                 firstNormalEpoch: 0n,
                 firstNormalSlot: 0n,
+                leaderScheduleSlotOffset: 432000n,
+                slotsPerEpoch: 432000n,
+                warmup: false,
             };
         }
 
