@@ -40,6 +40,10 @@ export function microLamportsToLamportsString(microLamports: number | bigint, ma
 }
 
 export function lamportsToSol(lamports: number | bigint): number {
+    if (lamports === undefined || lamports === null) {
+        return 0;
+    }
+    
     if (typeof lamports === 'number') {
         return lamports / LAMPORTS_PER_SOL;
     }
