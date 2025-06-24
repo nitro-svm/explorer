@@ -11,9 +11,9 @@ export enum Cluster {
     Custom,
 }
 
-// for now, we only support devnet
+// we don't have a testnet cluster
 // export const CLUSTERS = [Cluster.MainnetBeta, Cluster.Testnet, Cluster.Devnet, Cluster.Custom];
-export const CLUSTERS = [Cluster.Devnet, Cluster.Custom];
+export const CLUSTERS = [Cluster.MainnetBeta, Cluster.Devnet, Cluster.Custom];
 
 
 export function clusterSlug(cluster: Cluster): string {
@@ -67,4 +67,4 @@ export function clusterUrl(cluster: Cluster, customUrl: string): string {
     }
 }
 
-export const DEFAULT_CLUSTER = Cluster.Devnet; // Cluster.MainnetBeta;
+export const DEFAULT_CLUSTER = Cluster.MainnetBeta;
