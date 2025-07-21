@@ -120,16 +120,13 @@ export function SolanaClusterStatsProvider({ children }: Props) {
             }
         };
 
-        // Mock transaction count instead of fetching
         const getTransactionCount = async () => {
             try {
-                // Use a mock transaction count
-                const mockTransactionCount = BigInt(1000000);  // 1 million transactions
-                
+                const transactionCount = await rpc.getTransactionCount({ commitment: 'confirmed' }).send();
                 if (stale) return;
                 
                 dispatchPerformanceInfo({
-                    data: mockTransactionCount,
+                    data: transactionCount,
                     type: PerformanceInfoActionType.SetTransactionCount,
                 });
             } catch (error) {
