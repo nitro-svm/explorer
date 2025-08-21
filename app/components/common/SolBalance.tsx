@@ -3,14 +3,14 @@ import React from 'react';
 
 export function SolBalance({
     lamports,
-    maximumFractionDigits = 9,
+    maximumFractionDigits = 6,
 }: {
     lamports: number | bigint;
     maximumFractionDigits?: number;
 }) {
     return (
         <span>
-            ◎<span className="font-monospace">{lamportsToSolString(lamports, maximumFractionDigits)}</span>
+            <span className="font-monospace">{lamportsToSolString(lamports, maximumFractionDigits)}</span> SOLX
         </span>
     );
 }
