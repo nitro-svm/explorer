@@ -320,7 +320,7 @@ function StatusCard({ signature, autoRefresh }: SignatureProps & AutoRefreshProp
 
                 {fee && (
                     <tr>
-                        <td>Fee (SOL)</td>
+                        <td>Fee (SOLX)</td>
                         <td className="text-lg-end">
                             <SolBalance lamports={fee} />
                         </td>
