@@ -1,8 +1,29 @@
 import { PublicKey, TransactionSignature } from '@solana/web3.js';
 import { HumanizeDuration, HumanizeDurationLanguage } from 'humanize-duration-ts';
 
-// Switch to web3 constant when web3 updates superstruct
-export const LAMPORTS_PER_SOL = 1_000_000;
+// Get ticker and decimals from environment variables
+export function getTicker(): string {
+    if (typeof window !== 'undefined') {
+        return (window as any).__NEXT_DATA__?.props?.pageProps?.ticker || process.env.NEXT_PUBLIC_TOKEN_TICKER || 'SOL';
+    }
+    return process.env.NEXT_PUBLIC_TICKER || 'SOL';
+}
+
+export function getDecimals(): number {
+    if (typeof window !== 'undefined') {
+        const decimals = (window as any).__NEXT_DATA__?.props?.pageProps?.decimals || process.env.NEXT_PUBLIC_TOKEN_DECIMALS;
+        return parseInt(decimals || '9', 10);
+    }
+    return parseInt(process.env.NEXT_PUBLIC_DECIMALS || '9', 10);
+}
+
+export function getLamportsPerSol(): number {
+    const decimals = getDecimals();
+    return Math.pow(10, decimals);
+}
+
+// Default constant for when env vars are not available
+export const LAMPORTS_PER_SOL = parseInt(process.env.NEXT_PUBLIC_DECIMALS || '9', 10) === 9 ? 1_000_000_000 : Math.pow(10, parseInt(process.env.NEXT_PUBLIC_DECIMALS || '9', 10));
 export const MICRO_LAMPORTS_PER_LAMPORT = 1_000_000;
 
 export const NUM_TICKS_PER_SECOND = 160;
@@ -43,9 +64,11 @@ export function lamportsToSol(lamports: number | bigint): number {
     if (lamports === undefined || lamports === null) {
         return 0;
     }
-    
+
+    const lamportsPerSol = getLamportsPerSol();
+
     if (typeof lamports === 'number') {
-        return lamports / LAMPORTS_PER_SOL;
+        return lamports / lamportsPerSol;
     }
 
     let signMultiplier = 1;
@@ -53,16 +76,18 @@ export function lamportsToSol(lamports: number | bigint): number {
         signMultiplier = -1;
     }
 
+    const decimals = getDecimals();
     const absLamports = lamports < 0 ? -lamports : lamports;
-    const lamportsString = absLamports.toString(10).padStart(10, '0');
-    const splitIndex = lamportsString.length - 6;
+    const lamportsString = absLamports.toString(10).padStart(decimals + 1, '0');
+    const splitIndex = lamportsString.length - decimals;
     const solString = lamportsString.slice(0, splitIndex) + '.' + lamportsString.slice(splitIndex);
     return signMultiplier * parseFloat(solString);
 }
 
-export function lamportsToSolString(lamports: number | bigint, maximumFractionDigits = 6): string {
+export function lamportsToSolString(lamports: number | bigint, maximumFractionDigits?: number): string {
     const sol = lamportsToSol(lamports);
-    return new Intl.NumberFormat('en-US', { maximumFractionDigits }).format(sol);
+    const fractionDigits = maximumFractionDigits !== undefined ? maximumFractionDigits : getDecimals();
+    return new Intl.NumberFormat('en-US', { maximumFractionDigits: fractionDigits }).format(sol);
 }
 
 export function numberWithSeparator(s: string) {

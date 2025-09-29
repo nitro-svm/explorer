@@ -5,6 +5,7 @@ import { SolBalance } from '@components/common/SolBalance';
 import { Status, useFetchRichList, useRichList } from '@providers/richList';
 import { useSupply } from '@providers/supply';
 import { AccountBalancePair } from '@solana/web3.js';
+import { getTicker } from '@utils/index';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import React, { createRef, useMemo } from 'react';
@@ -16,6 +17,7 @@ import { percentage } from '../utils/math';
 type Filter = 'circulating' | 'nonCirculating' | 'all' | null;
 
 export function TopAccountsCard() {
+    const ticker = getTicker();
     const supply = useSupply();
     const richList = useRichList();
     const fetchRichList = useFetchRichList();
@@ -92,7 +94,7 @@ export function TopAccountsCard() {
                                 <tr>
                                     <th className="text-muted">Rank</th>
                                     <th className="text-muted">Address</th>
-                                    <th className="text-muted text-end">Balance (SOLX)</th>
+                                    <th className="text-muted text-end">{`Balance (${ticker})`}</th>
                                     <th className="text-muted text-end">% of {header} Supply</th>
                                 </tr>
                             </thead>

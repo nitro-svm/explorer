@@ -9,6 +9,7 @@ import { TableCardBody } from '@components/common/TableCardBody';
 import { Account, useFetchAccountInfo } from '@providers/accounts';
 import { useCluster } from '@providers/cluster';
 import { PublicKey } from '@solana/web3.js';
+import { getTicker } from '@utils/index';
 import { addressLabel } from '@utils/tx';
 import {
     ProgramAccountInfo,
@@ -66,6 +67,7 @@ export function UpgradeableProgramSection({
     programAccount: ProgramAccountInfo;
     programData: ProgramDataAccountInfo | undefined;
 }) {
+    const ticker = getTicker();
     const refresh = useFetchAccountInfo();
     const { cluster } = useCluster();
     const { data: squadMapInfo } = useSquadsMultisigLookup(programData?.authority, cluster);
@@ -98,7 +100,7 @@ export function UpgradeableProgramSection({
                     </tr>
                 )}
                 <tr>
-                    <td>Balance (SOLX)</td>
+                    <td>{`Balance (${ticker})`}</td>
                     <td className="text-lg-end text-uppercase">
                         <SolBalance lamports={account.lamports} />
                     </td>
@@ -205,6 +207,7 @@ export function UpgradeableProgramDataSection({
     account: Account;
     programData: ProgramDataAccountInfo;
 }) {
+    const ticker = getTicker();
     const refresh = useFetchAccountInfo();
     return (
         <div className="card">
@@ -224,7 +227,7 @@ export function UpgradeableProgramDataSection({
                     </td>
                 </tr>
                 <tr>
-                    <td>Balance (SOLX)</td>
+                    <td>{`Balance (${ticker})`}</td>
                     <td className="text-lg-end text-uppercase">
                         <SolBalance lamports={account.lamports} />
                     </td>
@@ -269,6 +272,7 @@ export function UpgradeableProgramBufferSection({
     account: Account;
     programBuffer: ProgramBufferAccountInfo;
 }) {
+    const ticker = getTicker();
     const refresh = useFetchAccountInfo();
     return (
         <div className="card">
@@ -288,7 +292,7 @@ export function UpgradeableProgramBufferSection({
                     </td>
                 </tr>
                 <tr>
-                    <td>Balance (SOLX)</td>
+                    <td>{`Balance (${ticker})`}</td>
                     <td className="text-lg-end text-uppercase">
                         <SolBalance lamports={account.lamports} />
                     </td>

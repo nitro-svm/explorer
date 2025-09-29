@@ -1,5 +1,6 @@
 import { Address } from '@components/common/Address';
 import { SolBalance } from '@components/common/SolBalance';
+import { getTicker } from '@utils/index';
 import { ParsedInstruction, SignatureResult, StakeProgram } from '@solana/web3.js';
 import React from 'react';
 
@@ -14,6 +15,7 @@ export function SplitDetailsCard(props: {
     innerCards?: JSX.Element[];
     childIndex?: number;
 }) {
+    const ticker = getTicker();
     const { ix, index, result, info, innerCards, childIndex } = props;
 
     return (
@@ -54,7 +56,7 @@ export function SplitDetailsCard(props: {
             </tr>
 
             <tr>
-                <td>Split Amount (SOLX)</td>
+                <td>{`Split Amount (${ticker})`}</td>
                 <td className="text-lg-end">
                     <SolBalance lamports={info.lamports} />
                 </td>

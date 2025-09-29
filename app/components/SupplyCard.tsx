@@ -3,11 +3,13 @@ import { LoadingCard } from '@components/common/LoadingCard';
 import { SolBalance } from '@components/common/SolBalance';
 import { TableCardBody } from '@components/common/TableCardBody';
 import { Status, useFetchSupply, useSupply } from '@providers/supply';
+import { getTicker } from '@utils/index';
 import React from 'react';
 
 export function SupplyCard() {
     const supply = useSupply();
     const fetchSupply = useFetchSupply();
+    const ticker = getTicker();
 
     // Fetch supply on load
     React.useEffect(() => {
@@ -30,21 +32,21 @@ export function SupplyCard() {
 
             <TableCardBody>
                 <tr>
-                    <td className="w-100">Total Supply (SOLX)</td>
+                    <td className="w-100">Total Supply ({ticker})</td>
                     <td className="text-lg-end">
                         <SolBalance lamports={supply.total} maximumFractionDigits={0} />
                     </td>
                 </tr>
 
                 <tr>
-                    <td className="w-100">Circulating Supply (SOLX)</td>
+                    <td className="w-100">Circulating Supply ({ticker})</td>
                     <td className="text-lg-end">
                         <SolBalance lamports={supply.circulating} maximumFractionDigits={0} />
                     </td>
                 </tr>
 
                 <tr>
-                    <td className="w-100">Non-Circulating Supply (SOLX)</td>
+                    <td className="w-100">Non-Circulating Supply ({ticker})</td>
                     <td className="text-lg-end">
                         <SolBalance lamports={supply.nonCirculating} maximumFractionDigits={0} />
                     </td>

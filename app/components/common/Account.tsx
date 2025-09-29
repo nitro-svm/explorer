@@ -1,5 +1,6 @@
 import { SolBalance } from '@components/common/SolBalance';
 import { Account } from '@providers/accounts';
+import { getTicker } from '@utils/index';
 import React from 'react';
 import { RefreshCw } from 'react-feather';
 
@@ -38,10 +39,11 @@ export function AccountAddressRow({ account }: AccountProps) {
 }
 
 export function AccountBalanceRow({ account }: AccountProps) {
+    const ticker = getTicker();
     const { lamports } = account;
     return (
         <tr>
-            <td>Balance (SOLX)</td>
+            <td>{`Balance (${ticker})`}</td>
             <td className="text-lg-end text-uppercase">
                 <SolBalance lamports={lamports} />
             </td>

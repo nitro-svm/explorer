@@ -2,7 +2,7 @@ import { Address } from '@components/common/Address';
 import { SolBalance } from '@components/common/SolBalance';
 import { useCluster } from '@providers/cluster';
 import { ComputeBudgetInstruction, SignatureResult, TransactionInstruction } from '@solana/web3.js';
-import { microLamportsToLamportsString } from '@utils/index';
+import { getTicker, microLamportsToLamportsString } from '@utils/index';
 import React from 'react';
 
 import { InstructionCard } from './InstructionCard';
@@ -22,6 +22,7 @@ export function ComputeBudgetDetailsCard({
     innerCards?: JSX.Element[];
     childIndex?: number;
 }) {
+    const ticker = getTicker();
     const { url } = useCluster();
     try {
         const type = ComputeBudgetInstruction.decodeInstructionType(ix);
@@ -52,7 +53,7 @@ export function ComputeBudgetDetailsCard({
                         </tr>
 
                         <tr>
-                            <td>Additional Fee (SOLX)</td>
+                            <td>{`Additional Fee (${ticker})`}</td>
                             <td className="text-lg-end">
                                 <SolBalance lamports={additionalFee} />
                             </td>

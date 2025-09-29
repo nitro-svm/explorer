@@ -1,5 +1,6 @@
 import { Address } from '@components/common/Address';
 import { SolBalance } from '@components/common/SolBalance';
+import { getTicker } from '@utils/index';
 import { ParsedInstruction, SignatureResult, SystemProgram } from '@solana/web3.js';
 import React from 'react';
 
@@ -14,6 +15,7 @@ export function TransferDetailsCard(props: {
     innerCards?: JSX.Element[];
     childIndex?: number;
 }) {
+    const ticker = getTicker();
     const { ix, index, result, info, innerCards, childIndex } = props;
 
     return (
@@ -47,7 +49,7 @@ export function TransferDetailsCard(props: {
             </tr>
 
             <tr>
-                <td>Transfer Amount (SOLX)</td>
+                <td>{`Transfer Amount (${ticker})`}</td>
                 <td className="text-lg-end">
                     <SolBalance lamports={info.lamports} />
                 </td>
