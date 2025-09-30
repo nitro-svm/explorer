@@ -1,7 +1,8 @@
+import { getTicker } from '@utils/index';
 import Link from 'next/link';
 import React from 'react';
 
-type FlaggedMap = Record<string, IncidentDescription>;
+type FlaggedMap = Record<string, () => IncidentDescription>;
 
 type IncidentId = 'ftx-hack-november-2022' | 'known-scam';
 type IncidentDescription = React.ReactElement;
@@ -24,8 +25,8 @@ const FLAGGED_ACCOUNTS: Record<string, IncidentId> = {
     GACpXND1SSfTSQMmqGuFvGwXB3jGEYBDRGNzmLfTYwSP: 'known-scam',
 };
 
-const INCIDENTS: Record<IncidentId, IncidentDescription> = {
-    'ftx-hack-november-2022': (
+const INCIDENTS: Record<IncidentId, () => IncidentDescription> = {
+    'ftx-hack-november-2022': () => (
         <>
             <div className="alert alert-danger alert-scam" role="alert">
                 Warning! This program&apos;s upgrade key may have been compromised by the FTX hack. Please migrate to
@@ -40,14 +41,16 @@ const INCIDENTS: Record<IncidentId, IncidentDescription> = {
             </div>
         </>
     ),
-    'known-scam': (
-        <>
-            <div className="alert alert-danger alert-scam" role="alert">
-                Warning! This account has been flagged by the community as a scam account. Please be cautious sending
-                SOLX to this account.
-            </div>
-        </>
-    ),
+    'known-scam': () => {
+        const ticker = getTicker();
+        return (
+            <>
+                <div className="alert alert-danger alert-scam" role="alert">
+                    Warning! This account has been flagged by the community as a scam account. Please be cautious sending {ticker} to this account.
+                </div>
+            </>
+        );
+    },
 } as const;
 
 const FLAGGED_ACCOUNTS_WARNING: FlaggedMap = {};

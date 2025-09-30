@@ -3,10 +3,12 @@ import { SolBalance } from '@components/common/SolBalance';
 import { TableCardBody } from '@components/common/TableCardBody';
 import { Account } from '@providers/accounts';
 import { useCluster } from '@providers/cluster';
+import { getTicker } from '@utils/index';
 import { addressLabel } from '@utils/tx';
 import React from 'react';
 
 export function UnknownAccountCard({ account }: { account: Account }) {
+    const ticker = getTicker();
     const { cluster } = useCluster();
 
     const label = addressLabel(account.pubkey.toBase58(), cluster);
@@ -30,7 +32,7 @@ export function UnknownAccountCard({ account }: { account: Account }) {
                     </tr>
                 )}
                 <tr>
-                    <td>Balance (SOLX)</td>
+                    <td>Balance ({ticker})</td>
                     <td className="text-lg-end">
                         {account.lamports === 0 ? 'Account does not exist' : <SolBalance lamports={account.lamports} />}
                     </td>

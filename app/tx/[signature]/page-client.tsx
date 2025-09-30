@@ -25,7 +25,7 @@ import { useFetchTransactionDetails } from '@providers/transactions/parsed';
 import { ParsedTransaction, SystemInstruction, SystemProgram, TransactionSignature } from '@solana/web3.js';
 import { Cluster, ClusterStatus } from '@utils/cluster';
 import { displayTimestamp } from '@utils/date';
-import { SignatureProps } from '@utils/index';
+import { getTicker, SignatureProps } from '@utils/index';
 import { getTransactionInstructionError } from '@utils/program-err';
 import { intoTransactionInstruction } from '@utils/tx';
 import { useClusterPath } from '@utils/url';
@@ -138,6 +138,7 @@ export default function TransactionDetailsPageClient({ params: { signature: raw 
 }
 
 function StatusCard({ signature, autoRefresh }: SignatureProps & AutoRefreshProps) {
+    const ticker = getTicker();
     const fetchStatus = useFetchTransactionStatus();
     const status = useTransactionStatus(signature);
     const details = useTransactionDetails(signature);
@@ -320,7 +321,7 @@ function StatusCard({ signature, autoRefresh }: SignatureProps & AutoRefreshProp
 
                 {fee && (
                     <tr>
-                        <td>Fee (SOLX)</td>
+                        <td>Fee ({ticker})</td>
                         <td className="text-lg-end">
                             <SolBalance lamports={fee} />
                         </td>
@@ -383,6 +384,7 @@ function DetailsSection({ signature }: SignatureProps) {
 }
 
 function AccountsCard({ signature }: SignatureProps) {
+    const ticker = getTicker();
     const details = useTransactionDetails(signature);
 
     const transactionWithMeta = details?.data?.transactionWithMeta;
@@ -442,8 +444,8 @@ function AccountsCard({ signature }: SignatureProps) {
                         <tr>
                             <th className="text-muted">#</th>
                             <th className="text-muted">Address</th>
-                            <th className="text-muted">Change (SOLX)</th>
-                            <th className="text-muted">Post Balance (SOLX)</th>
+                            <th className="text-muted">Change ({ticker})</th>
+                            <th className="text-muted">Post Balance ({ticker})</th>
                             <th className="text-muted">Details</th>
                         </tr>
                     </thead>

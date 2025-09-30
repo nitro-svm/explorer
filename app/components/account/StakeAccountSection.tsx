@@ -5,6 +5,7 @@ import { TableCardBody } from '@components/common/TableCardBody';
 import { Account, useFetchAccountInfo } from '@providers/accounts';
 import { StakeActivationData } from '@solana/web3.js';
 import { displayTimestampUtc } from '@utils/date';
+import { getTicker } from '@utils/index';
 import { StakeAccountInfo, StakeAccountType, StakeMeta } from '@validators/accounts/stake';
 import React from 'react';
 import { RefreshCw } from 'react-feather';
@@ -91,6 +92,7 @@ function OverviewCard({
     activation?: StakeActivationData;
     hideDelegation: boolean;
 }) {
+    const ticker = getTicker();
     const refresh = useFetchAccountInfo();
     return (
         <div className="card">
@@ -110,13 +112,13 @@ function OverviewCard({
                     </td>
                 </tr>
                 <tr>
-                    <td>Balance (SOLX)</td>
+                    <td>Balance ({ticker})</td>
                     <td className="text-lg-end text-uppercase">
                         <SolBalance lamports={account.lamports} />
                     </td>
                 </tr>
                 <tr>
-                    <td>Rent Reserve (SOLX)</td>
+                    <td>Rent Reserve ({ticker})</td>
                     <td className="text-lg-end">
                         <SolBalance lamports={stakeAccount.meta.rentExemptReserve} />
                     </td>
@@ -145,6 +147,7 @@ function DelegationCard({
     stakeAccountType: StakeAccountType;
     activation?: StakeActivationData;
 }) {
+    const ticker = getTicker();
     let voterPubkey, activationEpoch, deactivationEpoch;
     const delegation = stakeAccount?.stake?.delegation;
     if (delegation) {
@@ -171,7 +174,7 @@ function DelegationCard({
                 {stake && (
                     <>
                         <tr>
-                            <td>Delegated Stake (SOLX)</td>
+                            <td>Delegated Stake ({ticker})</td>
                             <td className="text-lg-end">
                                 <SolBalance lamports={stake.delegation.stake} />
                             </td>
@@ -180,14 +183,14 @@ function DelegationCard({
                         {activation && (
                             <>
                                 <tr>
-                                    <td>Active Stake (SOLX)</td>
+                                    <td>Active Stake ({ticker})</td>
                                     <td className="text-lg-end">
                                         <SolBalance lamports={activation.active} />
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td>Inactive Stake (SOLX)</td>
+                                    <td>Inactive Stake ({ticker})</td>
                                     <td className="text-lg-end">
                                         <SolBalance lamports={activation.inactive} />
                                     </td>

@@ -4,6 +4,7 @@ import { SolBalance } from '@components/common/SolBalance';
 import { TableCardBody } from '@components/common/TableCardBody';
 import { Account, useFetchAccountInfo } from '@providers/accounts';
 import { AddressLookupTableAccount } from '@solana/web3.js';
+import { getTicker } from '@utils/index';
 import { AddressLookupTableAccountInfo } from '@validators/accounts/address-lookup-table';
 import React from 'react';
 import { RefreshCw } from 'react-feather';
@@ -19,6 +20,7 @@ export function AddressLookupTableAccountSection(
               lookupTableAccount: AddressLookupTableAccountInfo;
           }
 ) {
+    const ticker = getTicker();
     const account = params.account;
     const lookupTableState = React.useMemo(() => {
         if ('data' in params) {
@@ -50,7 +52,7 @@ export function AddressLookupTableAccountSection(
                     </td>
                 </tr>
                 <tr>
-                    <td>Balance (SOLX)</td>
+                    <td>Balance ({ticker})</td>
                     <td className="text-lg-end text-uppercase">
                         <SolBalance lamports={account.lamports} />
                     </td>

@@ -3,7 +3,7 @@ import { Account, useAccountInfo, useAddressLookupTable, useFetchAccountInfo } f
 import { useCluster } from '@providers/cluster';
 import { PublicKey, SystemProgram } from '@solana/web3.js';
 import { ClusterStatus } from '@utils/cluster';
-import { lamportsToSolString } from '@utils/index';
+import { getTicker, lamportsToSolString } from '@utils/index';
 import { addressLabel } from '@utils/tx';
 import React from 'react';
 
@@ -98,10 +98,10 @@ function AccountInfo({ pubkey, validator }: { pubkey: PublicKey; validator?: Acc
     const ownerAddress = account.owner.toBase58();
     const ownerLabel = addressLabel(ownerAddress, cluster);
 
+    const ticker = getTicker();
     return (
         <span className="text-muted">
-            {`Owned by ${ownerLabel || ownerAddress}.`}
-            {` Balance is ${lamportsToSolString(account.lamports)} SOLX.`}
+            Owned by {ownerLabel || ownerAddress}. Balance is {lamportsToSolString(account.lamports)} {ticker}.
             {account.space !== undefined && ` Size is ${new Intl.NumberFormat('en-US').format(account.space)} byte(s).`}
         </span>
     );
