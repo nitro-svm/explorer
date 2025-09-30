@@ -154,7 +154,7 @@ type TpsBarChartProps = {
 function TpsBarChart({ performanceInfo, series, setSeries }: TpsBarChartProps) {
     const { perfHistory, avgTps, historyMaxTps } = performanceInfo;
     const averageTps = Math.round(avgTps).toLocaleString('en-US');
-    const transactionCount = <AnimatedTransactionCount info={performanceInfo} />;
+    const transactionCount = performanceInfo.transactionCount.toLocaleString('en-US'); // <AnimatedTransactionCount info={performanceInfo} />;
     const seriesData = perfHistory[series];
     const chartOptions = React.useMemo<ChartOptions<'bar'>>(() => TPS_CHART_OPTIONS(historyMaxTps), [historyMaxTps]);
 
@@ -219,6 +219,7 @@ function TpsBarChart({ performanceInfo, series, setSeries }: TpsBarChartProps) {
     );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function AnimatedTransactionCount({ info }: { info: PerformanceInfo }) {
     const txCountRef = React.useRef(0);
     const countUpRef = React.useRef({ lastUpdate: 0, period: 0, start: 0 });
@@ -244,7 +245,7 @@ function AnimatedTransactionCount({ info }: { info: PerformanceInfo }) {
             // Since this is the first tx count value, estimate the previous
             // tx count in order to have a starting point for our animation
             countUp.period = PERF_UPDATE_SEC * avgTps;
-            countUp.start = txCount - countUp.period;
+            countUp.start = Math.max(0, txCount - countUp.period);
         }
         countUp.lastUpdate = Date.now();
         txCountRef.current = txCount;
