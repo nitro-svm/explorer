@@ -52,7 +52,7 @@ export function AddressLookupTableAccountSection(
                     </td>
                 </tr>
                 <tr>
-                    <td>{`Balance (${ticker})`}</td>
+                    <td>Balance ({ticker})</td>
                     <td className="text-lg-end text-uppercase">
                         <SolBalance lamports={account.lamports} />
                     </td>

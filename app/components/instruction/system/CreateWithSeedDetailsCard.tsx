@@ -1,8 +1,8 @@
 import { Address } from '@components/common/Address';
 import { Copyable } from '@components/common/Copyable';
 import { SolBalance } from '@components/common/SolBalance';
-import { getTicker } from '@utils/index';
 import { ParsedInstruction, SignatureResult, SystemProgram } from '@solana/web3.js';
+import { getTicker } from '@utils/index';
 import React from 'react';
 
 import { InstructionCard } from '../InstructionCard';
@@ -66,7 +66,7 @@ export function CreateWithSeedDetailsCard(props: {
             </tr>
 
             <tr>
-                <td>{`Transfer Amount (${ticker})`}</td>
+                <td>Transfer Amount ({ticker})</td>
                 <td className="text-lg-end">
                     <SolBalance lamports={info.lamports} />
                 </td>

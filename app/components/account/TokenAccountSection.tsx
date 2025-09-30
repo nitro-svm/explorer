@@ -11,6 +11,7 @@ import { Cluster } from '@utils/cluster';
 import { CoingeckoStatus, useCoinGecko } from '@utils/coingecko';
 import { displayTimestamp, displayTimestampWithoutDate } from '@utils/date';
 import { abbreviatedNumber, normalizeTokenAmount } from '@utils/index';
+import { getTicker } from '@utils/index';
 import { addressLabel } from '@utils/tx';
 import { MintAccountInfo, MultisigAccountInfo, TokenAccount, TokenAccountInfo } from '@validators/accounts/token';
 import {
@@ -480,7 +481,7 @@ function TokenAccountCard({ account, info }: { account: Account; info: TokenAcco
                 </tr>
                 {info.rentExemptReserve && (
                     <tr>
-                        <td>{`Rent-exempt reserve (${ticker})`}</td>
+                        <td>Rent-exempt reserve ({ticker})</td>
                         <td className="text-lg-end">
                             <>
                                 ◎

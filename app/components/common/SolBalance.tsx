@@ -10,7 +10,7 @@ export function SolBalance({
 }) {
     const ticker = getTicker();
     const decimals = getDecimals();
-    const fractionDigits = maximumFractionDigits !== undefined ? maximumFractionDigits : decimals;
+    const fractionDigits = maximumFractionDigits ?? decimals;
 
     return (
         <span>

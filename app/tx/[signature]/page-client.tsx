@@ -321,7 +321,7 @@ function StatusCard({ signature, autoRefresh }: SignatureProps & AutoRefreshProp
 
                 {fee && (
                     <tr>
-                        <td>{`Fee (${ticker})`}</td>
+                        <td>Fee ({ticker})</td>
                         <td className="text-lg-end">
                             <SolBalance lamports={fee} />
                         </td>
@@ -444,8 +444,8 @@ function AccountsCard({ signature }: SignatureProps) {
                         <tr>
                             <th className="text-muted">#</th>
                             <th className="text-muted">Address</th>
-                            <th className="text-muted">{`Change (${ticker})`}</th>
-                            <th className="text-muted">{`Post Balance (${ticker})`}</th>
+                            <th className="text-muted">Change ({ticker})</th>
+                            <th className="text-muted">Post Balance ({ticker})</th>
                             <th className="text-muted">Details</th>
                         </tr>
                     </thead>

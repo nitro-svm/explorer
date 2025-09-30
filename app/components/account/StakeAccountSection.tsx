@@ -112,13 +112,13 @@ function OverviewCard({
                     </td>
                 </tr>
                 <tr>
-                    <td>{`Balance (${ticker})`}</td>
+                    <td>Balance ({ticker})</td>
                     <td className="text-lg-end text-uppercase">
                         <SolBalance lamports={account.lamports} />
                     </td>
                 </tr>
                 <tr>
-                    <td>{`Rent Reserve (${ticker})`}</td>
+                    <td>Rent Reserve ({ticker})</td>
                     <td className="text-lg-end">
                         <SolBalance lamports={stakeAccount.meta.rentExemptReserve} />
                     </td>
@@ -174,7 +174,7 @@ function DelegationCard({
                 {stake && (
                     <>
                         <tr>
-                            <td>{`Delegated Stake (${ticker})`}</td>
+                            <td>Delegated Stake ({ticker})</td>
                             <td className="text-lg-end">
                                 <SolBalance lamports={stake.delegation.stake} />
                             </td>
@@ -183,14 +183,14 @@ function DelegationCard({
                         {activation && (
                             <>
                                 <tr>
-                                    <td>{`Active Stake (${ticker})`}</td>
+                                    <td>Active Stake ({ticker})</td>
                                     <td className="text-lg-end">
                                         <SolBalance lamports={activation.active} />
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td>{`Inactive Stake (${ticker})`}</td>
+                                    <td>Inactive Stake ({ticker})</td>
                                     <td className="text-lg-end">
                                         <SolBalance lamports={activation.inactive} />
                                     </td>

@@ -46,8 +46,7 @@ const INCIDENTS: Record<IncidentId, () => IncidentDescription> = {
         return (
             <>
                 <div className="alert alert-danger alert-scam" role="alert">
-                    Warning! This account has been flagged by the community as a scam account. Please be cautious sending
-                    {` ${ticker} `}to this account.
+                    Warning! This account has been flagged by the community as a scam account. Please be cautious sending {ticker} to this account.
                 </div>
             </>
         );

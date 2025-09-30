@@ -101,8 +101,7 @@ function AccountInfo({ pubkey, validator }: { pubkey: PublicKey; validator?: Acc
     const ticker = getTicker();
     return (
         <span className="text-muted">
-            {`Owned by ${ownerLabel || ownerAddress}.`}
-            {` Balance is ${lamportsToSolString(account.lamports)} ${ticker}.`}
+            Owned by {ownerLabel || ownerAddress}. Balance is {lamportsToSolString(account.lamports)} {ticker}.
             {account.space !== undefined && ` Size is ${new Intl.NumberFormat('en-US').format(account.space)} byte(s).`}
         </span>
     );
