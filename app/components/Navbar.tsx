@@ -29,7 +29,7 @@ export function Navbar() {
         <nav className="navbar navbar-expand-md navbar-light">
             <div className="container">
                 <Link href={homePath}>
-                    <Image alt={`${appName} Explorer`} src={logo} style={{ maxHeight: '50px', maxWidth: '250px', width: 'auto', height: 'auto' }} />
+                    <Image alt={`${appName} Explorer`} src={logo} style={{ height: 'auto', maxHeight: '50px', maxWidth: '250px', width: 'auto' }} />
                 </Link>
 
                 <button className="navbar-toggler" type="button" onClick={() => setCollapse(value => !value)}>
