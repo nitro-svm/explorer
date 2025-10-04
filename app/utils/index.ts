@@ -6,7 +6,7 @@ export function getTicker(): string {
     if (typeof window !== 'undefined') {
         return (window as any).__NEXT_DATA__?.props?.pageProps?.ticker || process.env.NEXT_PUBLIC_TOKEN_TICKER || 'SOL';
     }
-    return process.env.NEXT_PUBLIC_TICKER || 'SOL';
+    return process.env.NEXT_PUBLIC_TOKEN_TICKER || 'SOL';
 }
 
 export function getDecimals(): number {
