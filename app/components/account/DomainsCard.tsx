@@ -20,7 +20,8 @@ export function DomainsCard({ address }: { address: string }) {
     ) {
         return <LoadingCard message="Loading domains" />;
     } else if (!domains || !domainsANS) {
-        return <ErrorCard text="Failed to fetch domains" />;
+        // DNS isn't available by default on custom clusters
+        return <ErrorCard text={`Domains aren't available on ${process.env.NEXT_PUBLIC_APP_NAME ?? 'the network'}`} />;
     }
 
     if (domains.length === 0 && domainsANS.length === 0) {
