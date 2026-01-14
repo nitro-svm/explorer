@@ -25,7 +25,6 @@ export const useUserANSDomains = (userAddress: string): [DomainInfo[] | null, bo
                 const allDomains = await parser.getAllUserDomains(userAddress);
 
                 if (!allDomains || allDomains.length === 0) {
-                    setResult([]);
                     return;
                 }
                 const userDomains: DomainInfo[] = [];
